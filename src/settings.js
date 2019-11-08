@@ -11,6 +11,8 @@ export const PADDLE_GAP = 10;
 export const BALL_RADIUS = 8;
 export const PADDLE_SPEED = 10;
 
+export const TEXT_SIZE = 30;
+
 export const KEYS = {
     p1Up: "w",
     p1Down: "s",

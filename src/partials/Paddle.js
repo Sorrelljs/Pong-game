@@ -41,6 +41,11 @@ export default class Paddle {
     setSpeed(speed) {
       this.speed = speed;
     }
+
+    getScore() {
+      return this.score;
+    }
+
     getCoordinates() {
       return {
           left: this.x,

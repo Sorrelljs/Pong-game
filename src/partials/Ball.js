@@ -1,4 +1,6 @@
 import { SVG_NS } from "../settings";
+import PingSound from '../../public/sounds/ahem_x.wav';
+import PingOut from '../../public/sounds/boo.wav';
 
 
 export default class Ball {
@@ -8,6 +10,8 @@ export default class Ball {
         this.boardWidth = boardWidth;
         this.boardHeight = boardHeight;
         this.direction = 1;
+        this.ping = new Audio(PingSound);
+        this.pingOut = new Audio(PingOut)
         this.reset();
     }
 
@@ -39,19 +43,21 @@ export default class Ball {
         }
         if (hitLeft) {
             this.direction = 1;
-            paddle2.increaseScore;
+            this.pingOut.play();
+            paddle2.increaseScore();
             this.reset();
         }
         if (hitRight) {
             this.direction = -1;
-            paddle1.increaseScore;
+            paddle1.increaseScore();
+            this.pingOut.play();
             this.reset();
         }
     }
 
     paddleCollision(paddle1, paddle2) {
         let hitWall = false, checkTop = false, checkBottom = false;
-        if (this.direction === 1) {
+        if (this.vx > 0) {
             
             const p2Walls = paddle2.getCoordinates();
              hitWall = (this.x + this.radius >= p2Walls.left);
@@ -69,7 +75,9 @@ export default class Ball {
 
             if (hitWall && checkTop && checkBottom) {
                 this.vx = this.vx * - 1;
-                this.direction = this.direction *-1; }
+                this.ping.play();
+                
+                 }
         
     }
   
