@@ -28,7 +28,8 @@ export default class Game {
     this.board.render(svg);
     this.paddleLeft.render(svg);
     this.paddleRight.render(svg);
-    this.ball.render(svg);
+    this.ball.render(svg, this.paddleLeft,this.paddleRight);
+    
 // More code goes here....
 
 

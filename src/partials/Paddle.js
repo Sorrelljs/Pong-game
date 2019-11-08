@@ -34,6 +34,14 @@ export default class Paddle {
     }
 
 
+    getCoordinates() {
+      return {
+          left: this.x,
+          top: this.y, 
+          right: this.x + this.width,
+          bottom: this.y + this.height
+      };
+    }
         
 
 
