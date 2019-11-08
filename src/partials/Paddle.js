@@ -1,4 +1,4 @@
-import { SVG_NS, BOARD_COLOR } from "../settings";
+import { SVG_NS, BOARD_COLOR, PADDLE_SPEED } from "../settings";
 
 
 export default class Paddle {
@@ -9,7 +9,7 @@ export default class Paddle {
       this.y = y;
       this.boardHeight = boardHeight;
       this.score = 0;
-      this.speed = 10;
+      this.speed = PADDLE_SPEED;
       document.addEventListener("keydown", (event) => {
           switch (event.key) {
             case upKey:
@@ -34,6 +34,13 @@ export default class Paddle {
     }
 
 
+    increaseScore() {
+       this.score = this.score + 1;
+      }
+
+    setSpeed(speed) {
+      this.speed = speed;
+    }
     getCoordinates() {
       return {
           left: this.x,

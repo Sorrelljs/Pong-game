@@ -1,4 +1,4 @@
-import { SVG_NS, PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_GAP, KEYS, BALL_RADIUS} from '../settings';
+import { SVG_NS, PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_GAP, PADDLE_SPEED, KEYS, BALL_RADIUS} from '../settings';
 import Board from './Board'; 
 import Paddle from './Paddle';
 import Ball from './Ball';
@@ -13,10 +13,24 @@ export default class Game {
     this.paddleLeft = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT, this.height, PADDLE_GAP, this.height/2 - PADDLE_HEIGHT/2, KEYS.p1Up, KEYS.p1Down);
     this.paddleRight = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT, this.height, this.width - PADDLE_GAP - PADDLE_WIDTH, this.height/2 - PADDLE_HEIGHT/2,  KEYS.p2Up, KEYS.p2Down);
     this.ball = new Ball(BALL_RADIUS, this.width, this.height);
+    this.paused = false;
+    document.addEventListener("keydown", (event) => {
+      if (event.key === KEYS.pause) {
+        this.paddleLeft.setSpeed(PADDLE_SPEED);
+        this.paddleRight.setSpeed(PADDLE_SPEED);
+        this.paused = !(this.paused);
+    }
     // Other code goes here...
-  }
+  });
+}
 
-  render() {
+  render(){
+    if(this.paused){
+      this.paddleLeft.setSpeed(0);
+      this.paddleRight.setSpeed(0);
+      return; 
+    }
+
     this.gameElement.innerHTML = "";
 
     let svg = document.createElementNS(SVG_NS, "svg");
