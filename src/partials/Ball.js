@@ -1,6 +1,7 @@
 import { SVG_NS } from "../settings";
 import PingSound from '../../public/sounds/ahem_x.wav';
 import PingOut from '../../public/sounds/boo.wav';
+/* import PingMusic from '../../public/sounds/ufo_x.wav'; */
 
 
 export default class Ball {
@@ -11,22 +12,27 @@ export default class Ball {
         this.boardHeight = boardHeight;
         this.direction = 1;
         this.ping = new Audio(PingSound);
-        this.pingOut = new Audio(PingOut)
+        this.pingOut = new Audio(PingOut);
+        this.speed = 1;
+       // this.pingMusic = new Audio(pingMusic)
         this.reset();
     }
 
         ballMove() {
-            this.x = this.x + this.vx;
-            this.y = this.y + this.vy;
+            this.x = this.x + (this.vx * this.speed);
+            this.y = this.y + (this.vy * this.speed);
         }
     
-
+    setSpeed(speed) {
+        this.speed = speed;
+    }
 
     reset(){
     
         this.x = this.boardWidth/2;
         this.y = this.boardHeight/2;
         this.vy = 0;
+        this.speed = 1;
         while (this.vy === 0) {
             this.vy = Math.floor(Math.random() * 10) - 5;
         }
@@ -57,6 +63,7 @@ export default class Ball {
 
     paddleCollision(paddle1, paddle2) {
         let hitWall = false, checkTop = false, checkBottom = false;
+        this.setSpeed(this.speed += 0.001);
         if (this.vx > 0) {
             
             const p2Walls = paddle2.getCoordinates();
@@ -68,8 +75,8 @@ export default class Ball {
 
             const p1Walls = paddle1.getCoordinates();
             hitWall = (this.x - this.radius <= p1Walls.right);
-             checkTop = (this.y - this.radius >= p1Walls.top);
-          checkBottom = (this.y + this.radius <= p1Walls.bottom);
+            checkTop = (this.y - this.radius >= p1Walls.top);
+            checkBottom = (this.y + this.radius <= p1Walls.bottom);
           
         }
 

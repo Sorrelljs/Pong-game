@@ -1,4 +1,4 @@
-import { SVG_NS, PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_GAP, PADDLE_SPEED, KEYS, BALL_RADIUS, TEXT_SIZE} from '../settings';
+import { SVG_NS, PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_GAP, PADDLE_SPEED, KEYS, BALL_RADIUS, TEXT_SIZE, MAXIMUM_POINT} from '../settings';
 import Board from './Board'; 
 import Paddle from './Paddle';
 import Ball from './Ball';
@@ -27,6 +27,33 @@ export default class Game {
   });
 }
 
+
+gameWin (svg){
+  if (this.paddleLeft.getScore() > MAXIMUM_POINT || this.paddleRight.getScore() > MAXIMUM_POINT){
+    this.paddleLeft.resetScore();
+    this.paddleRight.resetScore();
+    this.paused = true; 
+
+    let gameWinText = document.createElementNS(SVG_NS, "text")
+    gameWinText.setAttributeNS(null, "font-size", 50);
+    gameWinText.setAttributeNS(null, "x", 40);
+    gameWinText.setAttributeNS(null, "y", 100);
+    gameWinText.setAttributeNS(null, "fill", "white");
+    gameWinText.textContent = 'WIN GAME' + '!';
+    svg.appendChild(gameWinText);
+
+
+    
+setTimeout(function(){
+        window.location.reload(1);
+       }, 5000);
+   
+  };
+  
+}
+
+
+
   render(){
     if(this.paused){
       this.paddleLeft.setSpeed(0);
@@ -48,11 +75,17 @@ export default class Game {
     this.ball.render(svg, this.paddleLeft,this.paddleRight);
     this.score1.render(svg, this.paddleRight.getScore());
     this.score2.render(svg, this.paddleLeft.getScore());
-    
+
+    if(this.paddleRight.getScore() === 9){
+      console.log('score 9');
+    }
+
+    if(this.paddleLeft.getScore() === 9){
+      console.log('score 9');
+    }
+
+    this.gameWin(svg);
 // More code goes here....
-
-
-
 
   }
 }

@@ -19,12 +19,19 @@ export default class Paddle {
                 this.moveDown();
                 break;
                 
-               
+          
 
           }
       });
     }
 
+  
+    resetScore(){
+      this.score = 0;
+    }
+
+    
+    
     moveUp(){
         this.y = Math.max(0, this.y - this.speed);
     }
@@ -32,6 +39,8 @@ export default class Paddle {
     moveDown(){
         this.y = Math.min(this.boardHeight - this.height , this.y + this.speed)
     }
+
+
 
 
     increaseScore() {
@@ -69,7 +78,7 @@ export default class Paddle {
         rect.setAttributeNS(null, "height", this.height);
         rect.setAttributeNS(null, "x", this.x);
         rect.setAttributeNS(null, "y", this.y);
-        rect.setAttributeNS(null, "fill", "white");
+        rect.setAttributeNS(null, "fill", "yellow");
 
     
 
