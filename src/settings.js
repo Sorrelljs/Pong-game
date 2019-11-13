@@ -13,7 +13,7 @@ export const PADDLE_SPEED = 10;
 
 export const TEXT_SIZE = 30;
 
-export const MAXIMUM_POINT = 2;
+export const MAXIMUM_POINT = 5;
 
 export const KEYS = {
     p1Up: "w",
