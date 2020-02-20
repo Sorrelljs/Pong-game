@@ -39,3 +39,8 @@ Once you have done this, you can run:
 `$ npm run deploy`
 
 Now check out your deployed site 🙂
+
+
+### Learning
+
+This was a true insight into OOP learning. I had alot of fun figuring out all the dynamics of the pong game. 
